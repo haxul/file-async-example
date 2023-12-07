@@ -1,17 +1,14 @@
+#define _POSIX_SOURCE
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <fcntl.h>
 #include <event2/event.h>
 #include <event2/buffer.h>
-#include <event2/bufferevent.h>
-#include <assert.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
 #include <aio.h>
-#include <stdint.h>
 
 #define BUFF_SIZE 4 * 1024
 
@@ -40,7 +37,7 @@ int main() {
     if (fp == NULL) {
         return 1;
     }
-    const char buf[BUFF_SIZE];
+    char buf[BUFF_SIZE];
 
     struct aiocb* aio = async_read(fp, buf, BUFF_SIZE);
 
