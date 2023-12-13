@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <fcntl.h>
@@ -96,7 +97,6 @@ do_accept(evutil_socket_t listener, short event, void* arg) {
 }
 
 void run(void) {
-
     struct event_base* base = event_base_new();
     if (!base) {
         return; /*XXXerr*/
@@ -120,7 +120,7 @@ void run(void) {
         return;
     }
 
-    struct event* listener_event  = event_new(base, listener, EV_READ | EV_PERSIST, do_accept, base);
+    struct event* listener_event = event_new(base, listener, EV_READ | EV_PERSIST, do_accept, base);
     /*XXX check it */
     event_add(listener_event, NULL);
 

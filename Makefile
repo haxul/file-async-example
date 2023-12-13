@@ -1,4 +1,12 @@
-run-gcc:
-	gcc -Wall -g -std=c99 -levent main.c -o main
+ASYNC_FILE_IO=src/async_file_io.c
+build:
+	gcc -Wall -g -std=c99 -levent $(ASYNC_FILE_IO) main.c -o main
 
-all: run-gcc
+run:
+	gcc -Wall -g -std=c99 -levent $(ASYNC_FILE_IO) main.c -o main && ./main
+
+all: run
+
+
+build-asm:
+	gcc -c -g assem.s && ld assem.o -o assem && rm assem.o 
